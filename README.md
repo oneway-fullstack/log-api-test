@@ -1,6 +1,6 @@
 # log-api test
 ## Introduction
-1. 1. Create an API end point '/v1/log' using node.js, receiving from POST request with a list of numbers as album ID in json (e.g. [1, 3]), then get album title from https://jsonplaceholder.typicode.com/albums/{album_id} and corresponding user name of album from https://jsonplaceholder.typicode.com/users/{user_id}, then save album title with user name to the Google sheet shared with you.
+1. Create an API end point '/v1/log' using node.js, receiving from POST request with a list of numbers as album ID in json (e.g. [1, 3]), then get album title from https://jsonplaceholder.typicode.com/albums/{album_id} and corresponding user name of album from https://jsonplaceholder.typicode.com/users/{user_id}, then save album title with user name to the Google sheet shared with you.
 2. Save the name and count as csv sorted by count
 3. Try to get name origins (e.g. Greek, Hebrew) from any online source you prefer (for example behindthename.com), and generate a csv of origin with number of occurrences. Sort by number of occurrences.
 
