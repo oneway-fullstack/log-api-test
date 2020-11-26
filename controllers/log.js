@@ -1,37 +1,33 @@
-const { GoogleSpreadsheet } = require('google-spreadsheet');
 const utils = require('../helpers/utils')
-var creds = require('../google/client_secret.json');
-
+const creds = require('../google/client_secret.json');
+const google = require('../google/service');
 
 exports.saveInfo = async (req, res) => {
     let status = 'success';
     let message = 'The log has been saved into the google spread sheet successfully.';
 
-    try {
-        const doc = new GoogleSpreadsheet(process.env.GOOGLE_SPREADSHEET_ID);
-        await doc.useServiceAccountAuth(creds);
-        await doc.loadInfo(); // loads sheets
-        let sheet = doc.sheetsByIndex[0];
-        sheet.setHeaderRow(['Name', 'Title']);
-        let idList = req.body.params;
+    //try
+    {
+        const idList =[...new Set(req.body.params)];
+
         let queue = [];
-        idList .forEach((id) => {
+        idList.forEach(async (id) => {
             queue.push(
                 utils.getInfo(id)
                     .then( data => {
-                        return sheet.addRow({
+                        return {
                             Name: data.name,
                             Title: data.title
-                        });
+                        };
                     })
             )
         });
-
-        await Promise.all(queue);
-    } catch (error) {
+        const list = await Promise.all(queue);
+        await google.sheet_process(list);
+    } /*catch (error) {
         status = 'error';
         message = error;
-    }
+    }*/
 
     let result = {
         'status': status,

@@ -1,7 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
-
 const indexRoute = require('.')
 const app = express();
 
@@ -13,5 +12,6 @@ app.use((req, res, next) => {
   bodyParser.json({ type: 'application/*+json' });
   next();
 });
+
 app.use('/', indexRoute);
 module.exports = app;
