@@ -1,6 +1,5 @@
 const utils = require('../helpers/utils')
-const creds = require('../google/client_secret.json');
-const google = require('../google/service');
+const { getDoc } = require('../lib/gsheet');
 
 exports.saveInfo = async (req, res) => {
     let status = 'success';
@@ -23,7 +22,10 @@ exports.saveInfo = async (req, res) => {
             )
         });
         const list = await Promise.all(queue);
-        await google.sheet_process(list);
+        const doc = await getDoc();
+        const sheet = doc.sheetsByIndex[0];
+
+        await sheet.addRows(list);
     } /*catch (error) {
         status = 'error';
         message = error;
