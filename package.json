@@ -9,6 +9,7 @@
     "express": "^4.17.1",
     "google-spreadsheet": "^3.0.13",
     "http": "^0.0.1-security",
+    "node-cache": "^5.1.2",
     "node-fetch": "^2.6.1"
   },
   "devDependencies": {
